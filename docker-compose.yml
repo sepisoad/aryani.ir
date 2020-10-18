@@ -4,6 +4,6 @@ services:
     container_name: ghost_aryani_ir
     image: ghost:3.35.5
     ports:
-      - "1987:2368"
+      - "2368:2368"
     volumes:
       - ./:/ghost
