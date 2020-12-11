@@ -1,0 +1,4 @@
+User-agent: *
+Sitemap: aryani.ir/sitemap.xml
+Disallow: /ghost/
+Disallow: /p/
