@@ -14,7 +14,7 @@ module.exports = {
     accent_color: 'accent_color',
     cover_image: 'cover_image',
     facebook: 'facebook',
-    twitter: 'twitter',
+    twitter: 'twitter',    
     lang: 'lang',
     timezone: 'timezone',
     codeinjection_head: 'codeinjection_head',

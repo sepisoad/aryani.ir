@@ -7,7 +7,7 @@
   "database": {
     "client": "sqlite3",
     "connection": {
-      "filename": "/home/sepisoad/Projects/sepisoad/aryani_ir/content/data/ghost-local.db"
+      "filename": "/home/sepisoad/Projects/sepisoad/aryani_ir/content/data/ghost-dev.db"
     }
   },
   "mail": {

@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <title>Elm Url Parser</title>
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" type="text/css" href="../assets/built/screen.css%3Fv=7fa67144df.css" />
+
+    <meta name="description" content="how elm Url Parser package works" />
+    <link rel="canonical" href="index.html" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+    <link rel="amphtml" href="amp/index.html" />
+    
+    <meta property="og:site_name" content="aryani.ir" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Elm Url Parser" />
+    <meta property="og:description" content="how elm Url Parser package works" />
+    <meta property="og:url" content="aryani.ir/my-journey-into-the-elm-url-parser-package/" />
+    <meta property="og:image" content="aryani.ir/content/images/2021/01/benoit-beaumatin-xdai21Y9pek-unsplash.jpg" />
+    <meta property="article:published_time" content="2021-01-14T00:10:26.000Z" />
+    <meta property="article:modified_time" content="2021-01-14T00:10:26.000Z" />
+    <meta property="article:tag" content="elm" />
+    <meta property="article:tag" content="functional" />
+    <meta property="article:tag" content="programming" />
+    <meta property="article:tag" content="type" />
+    <meta property="article:tag" content="url" />
+    <meta property="article:tag" content="web" />
+    
+    <meta property="article:publisher" content="https://www.facebook.com/ghost" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Elm Url Parser" />
+    <meta name="twitter:description" content="how elm Url Parser package works" />
+    <meta name="twitter:url" content="aryani.ir/my-journey-into-the-elm-url-parser-package/" />
+    <meta name="twitter:image" content="aryani.ir/content/images/2021/01/benoit-beaumatin-xdai21Y9pek-unsplash.jpg" />
+    <meta name="twitter:label1" content="Written by" />
+    <meta name="twitter:data1" content="Sepehr Aryani" />
+    <meta name="twitter:label2" content="Filed under" />
+    <meta name="twitter:data2" content="elm, functional, programming, type, url, web" />
+    <meta name="twitter:site" content="@ghost" />
+    <meta property="og:image:width" content="640" />
+    <meta property="og:image:height" content="427" />
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "aryani.ir",
+        "url": "aryani.ir/",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "aryani.ir/content/images/2020/12/aryani-4.svg"
+        }
+    },
+    "author": {
+        "@type": "Person",
+        "name": "Sepehr Aryani",
+        "image": {
+            "@type": "ImageObject",
+            "url": "//www.gravatar.com/avatar/0c8ce11d7f0ab0c1ab9b51a5e279c790?s=250&d=mm&r=x",
+            "width": 250,
+            "height": 250
+        },
+        "url": "aryani.ir/author/sepehr/",
+        "sameAs": []
+    },
+    "headline": "Elm Url Parser",
+    "url": "aryani.ir/my-journey-into-the-elm-url-parser-package/",
+    "datePublished": "2021-01-14T00:10:26.000Z",
+    "dateModified": "2021-01-14T00:10:26.000Z",
+    "image": {
+        "@type": "ImageObject",
+        "url": "aryani.ir/content/images/2021/01/benoit-beaumatin-xdai21Y9pek-unsplash.jpg",
+        "width": 640,
+        "height": 427
+    },
+    "keywords": "elm, functional, programming, type, url, web",
+    "description": "\nRecently I was asked by one of my customers to create a website for her vet\nclinic, she wanted the website to act like an app (SPA/PWA) when opened on\nmobile phones. I was not under time pressure, and I always wanted to learn Elm\n[https://elm-lang.org/], so it seemed the perfect time to learn something and\nmake some money at the same time.\n\nIt turned out that learning elm is going to be very challenging. Elm is a purely\nfunctional programming language that can only be used to develop web apps (",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "aryani.ir/"
+    }
+}
+    </script>
+
+    <meta name="generator" content="Ghost 3.40" />
+    <link rel="alternate" type="application/rss+xml" title="aryani.ir" href="../rss/index.html" />
+
+</head>
+<body class="post-template tag-elm tag-functional tag-programming tag-type tag-url tag-web">
+
+    <div class="site-wrapper">
+
+        
+
+<header class="site-header">
+    <div class="outer site-nav-main">
+    <div class="inner">
+        <nav class="site-nav">
+    <div class="site-nav-left-wrapper">
+        <div class="site-nav-left">
+                <a class="site-nav-logo" href="../index.html"><img src="../content/images/size/w1000/2020/12/aryani-4.svg" alt="aryani.ir" /></a>
+            <div class="site-nav-content">
+                    <ul class="nav">
+    <li class="nav-home"><a href="../index.html">Home</a></li>
+</ul>
+
+                    <span class="nav-post-title ">my journey into the elm url parser package</span>
+            </div>
+        </div>
+    </div>
+    <div class="site-nav-right">
+            <div class="social-links">
+                    <a class="social-link social-link-fb" href="https://www.facebook.com/ghost" title="Facebook" target="_blank" rel="noopener"><svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M16 0c8.837 0 16 7.163 16 16s-7.163 16-16 16S0 24.837 0 16 7.163 0 16 0zm5.204 4.911h-3.546c-2.103 0-4.443.885-4.443 3.934.01 1.062 0 2.08 0 3.225h-2.433v3.872h2.509v11.147h4.61v-11.22h3.042l.275-3.81h-3.397s.007-1.695 0-2.187c0-1.205 1.253-1.136 1.329-1.136h2.054V4.911z" /></svg></a>
+                    <a class="social-link social-link-tw" href="https://twitter.com/ghost" title="Twitter" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
+</a>
+            </div>
+                <a class="rss-button" href="https://feedly.com/i/subscription/feed/aryani.ir/rss/" title="RSS" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="6.18" cy="17.82" r="2.18"/><path d="M4 4.44v2.83c7.03 0 12.73 5.7 12.73 12.73h2.83c0-8.59-6.97-15.56-15.56-15.56zm0 5.66v2.83c3.9 0 7.07 3.17 7.07 7.07h2.83c0-5.47-4.43-9.9-9.9-9.9z"/></svg>
+</a>
+
+    </div>
+</nav>
+    </div>
+</div></header>
+
+
+<main id="site-main" class="site-main outer">
+    <div class="inner">
+
+        <article class="post-full post tag-elm tag-functional tag-programming tag-type tag-url tag-web featured ">
+
+            <header class="post-full-header">
+
+                <section class="post-full-tags">
+                    <a href="../tag/elm/index.html">elm</a>
+                </section>
+
+                <h1 class="post-full-title">my journey into the elm url parser package</h1>
+
+
+                <div class="post-full-byline">
+
+                    <section class="post-full-byline-content">
+
+                        <ul class="author-list">
+                            <li class="author-list-item">
+
+                                <div class="author-card">
+                                    <img class="author-profile-image" src="https://www.gravatar.com/avatar/0c8ce11d7f0ab0c1ab9b51a5e279c790?s=250&amp;d=mm&amp;r=x" alt="Sepehr Aryani" />
+                                    <div class="author-info">
+                                        <h2>Sepehr Aryani</h2>
+                                        <p>Read <a href="../author/sepehr/index.html">more posts</a> by this author.</p>
+                                    </div>
+                                </div>
+
+                                <a href="../author/sepehr/index.html" class="author-avatar">
+                                    <img class="author-profile-image" src="https://www.gravatar.com/avatar/0c8ce11d7f0ab0c1ab9b51a5e279c790?s=250&amp;d=mm&amp;r=x" alt="Sepehr Aryani" />
+                                </a>
+
+                            </li>
+                        </ul>
+
+                        <section class="post-full-byline-meta">
+                            <h4 class="author-name"><a href="../author/sepehr/index.html">Sepehr Aryani</a></h4>
+                            <div class="byline-meta-content">
+                                <time class="byline-meta-date" datetime="2021-01-14">14 Jan 2021</time>
+                                <span class="byline-reading-time"><span class="bull">&bull;</span> 7 min read</span>
+                            </div>
+                        </section>
+
+                    </section>
+
+
+                </div>
+            </header>
+
+            <figure class="post-full-image">
+                <img
+                    srcset="../content/images/size/w300/2021/01/benoit-beaumatin-xdai21Y9pek-unsplash.jpg 300w,
+                           ../content/images/size/w600/2021/01/benoit-beaumatin-xdai21Y9pek-unsplash.jpgg 600w,
+                          ../content/images/size/w1000/2021/01/benoit-beaumatin-xdai21Y9pek-unsplash.jpgpg 1000w,
+                         ../content/images/size/w2000/2021/01/benoit-beaumatin-xdai21Y9pek-unsplash.jpgjpg 2000w"
+                    sizes="(max-width: 800px) 400px,
+                        (max-width: 1170px) 1170px,
+                            2000px"
+                    src="../content/images/size/w2000/2021/01/benoit-beaumatin-xdai21Y9pek-unsplash.jpg"
+                    alt="my journey into the elm url parser package"
+                />
+            </figure>
+
+            <section class="post-full-content">
+                <div class="post-content">
+                    <h1></h1><p>Recently I was asked by one of my customers to create a website for her vet clinic, she wanted the website to act like an app (SPA/PWA) when opened on mobile phones. I was not under time pressure, and I always wanted to learn <a href="https://elm-lang.org/">Elm</a>, so it seemed the perfect time to learn something and make some money at the same time.</p><p>It turned out that learning elm is going to be very challenging. Elm is a purely functional programming language that can only be used to develop web apps (as of now). I had some experience with some other functional languages like <a href="https://clojure.org/">clojure</a> so I thought It would not be that different, but I was wrong. The language is so radically different than all other languages (e.g. javascript) that to me it felt like learning programming from scratch.</p><p>Also, learning materials like online tutorials, videos and books are so scarce, so if you are planning to learn elm be prepared that you are going to read a lot of other's codes.</p><p>Elm belongs to the ML family of languages and it has its roots in <a href="https://haskell.org/">haskell</a>, in fact, the elm compiler itself is written in haskell. As far as I can tell compared to haskell, elm is a fairly smaller language, but small things are not necessarily easy as well. The most mind-bending (and beautiful) feature of elm is its typing system. using its sophisticated type inference elm can detect (almost) all bugs on compile time so you are free from runtime exceptions :)</p><p>While I was learning about elm by reading source codes I stumbled upon <a href="https://package.elm-lang.org/packages/elm/url/latest/Url-Parser">Url.Parser</a> package. I could not understand why they package is designed the it is and samples were not helpful. So I set out to dig into the package source code and see what I get out of it.</p><p>I have an attitude of breaking complex stuff recursively until I grok every single concept, then I build my way up until I construct the big picture.</p><p>I took this simple piece of coded and decided to apply my method on it.</p><pre><code class="language-elm">import Url exposing (..)
+import Url.Parser exposing (..)
+
+urlMaybe = fromString "https://example.com/foo/bar/1987"
+
+case urlMaybe of
+  Just url -&gt; 
+    case (parse (s "foo" &lt;/&gt; s "bar" &lt;/&gt; int) url) of
+      Just year -&gt; year
+      Nothing -&gt; -1
+  Nothing -&gt; -1
+</code></pre><p>Looking at the code above I can say it is fairly straightforward and meaningful except for this line:</p><pre><code class="language-elm">parse (s "foo" &lt;/&gt; s "bar" &lt;/&gt; int) url
+</code></pre><p>Hmmmmmm, it looks so cryptic!!! What is this <code>s "blah blah"</code> thing or this weird <code>&lt;/&gt;</code> symbol, how does <code>parse</code> function parses the url. Running the code above in elm REPL results in this value:</p><pre><code class="language-elm">1987 : Int
+</code></pre><p>Why? Whyyyy? I mean Why? What about the rest of the url, does <code>parse</code> function always return the last part of the url (in our case "1987") or what??? Ok, I need to break it down to its pieces:</p><pre><code class="language-elm">parse (s "foo" &lt;/&gt; s "bar" &lt;/&gt; int) url =&gt; Maybe 1987
+┗━┳━┛ ┗━━━━━━━━━━━━━┳━━━━━━━━━━━━━┛ ┗┳┛
+parse:      Parser (a -&gt; a) a    -&gt; Url -&gt; Maybe a
+┏━┻━┓ ┏━━━━━━━━━━━━━┻━━━━━━━━━━━━━┓ ┏┻┓    ┏━━┻━━┓
+ AHA               WTF              WTF      AHA
+</code></pre><p>Ok, so <code>parse</code> takes in a <code>Parser</code> and an <code>Url</code> then returns a <code>Maybe</code> value. I understand the return type so I tagged it as <strong>AHA</strong> . Before jumping into the parse function lets see how the <code>Url</code> tpye represents our url value:</p><pre><code class="language-elm">type Protocol = Http | Https
+
+type alias Url =
+  { protocol : Protocol      -- Https
+  , host : String            -- example.com
+  , port_ : Maybe Int        -- Nothing
+  , path : String            -- /foo/bar/1987
+  , query : Maybe String     -- Nothing
+  , fragment : Maybe String  -- Nothing
+  }
+</code></pre><p>Aha, so this is how our url value is kept as a <code>Url</code> type, easy peasy. Ok, we have progressed one more step, so let me update our <strong>AHA</strong> tags:</p><pre><code class="language-elm">parse (s "foo" &lt;/&gt; s "bar" &lt;/&gt; int) url =&gt; Maybe 1987
+┗━┳━┛ ┗━━━━━━━━━━━━━┳━━━━━━━━━━━━━┛ ┗┳┛
+parse:      Parser (a -&gt; a) a    -&gt; Url -&gt; Maybe a
+┏━┻━┓ ┏━━━━━━━━━━━━━┻━━━━━━━━━━━━━┓ ┏┻┓    ┏━━┻━━┓
+ AHA               WTF              AHA      AHA
+</code></pre><p>Cool, I have only one <strong>WTF</strong> to solve. To simplify things I will remove all other <strong>AHA</strong>s and focus on the last <strong>WTF</strong> item, sooo, what do I do next, yes I break it down again:</p><pre><code class="language-elm">s "foo" &lt;/&gt; s "bar" &lt;/&gt; int
+┗━━┳━━┛ ┗┳┛ ┗━━┳━━┛ ┗┳┛ ┗┳┛
+┏━━┻━━┓ ┏┻┓ ┏━━┻━━┓ ┏┻┓ ┏┻┓
+  WTF   WTF   WTF   WTF WTF
+</code></pre><p>Oh shhhhhh, five new <strong>WTF</strong>s, Dang it. OK so I can see that in fact there are only three distict <strong>WTF</strong> in the expression above:</p><pre><code class="language-elm">s "foo" &lt;/&gt; s "bar" &lt;/&gt; int
+┗━━┳━━┛ ┗┳┛ ┗━━┳━━┛ ┗┳┛ ┗┳┛
+┏━━┻━━┓ ┏┻┓ ┏━━┻━━┓ ┏┻┓ ┏┻┓
+  WTF   WTF   WTF   WTF WTF
+┗━━┳━━┛ ┗┳┛ ┗━━┳━━┛ ┗┳┛ ┗┳┛
+   ┃     ┗━━━━━┿━━┳━━┛   ┃
+   ┗━━━━━┳━━━━━┛  ┃      ┃
+      s "foo"    &lt;/&gt;    int
+      s "bar"    &lt;/&gt;    ┃ ┃
+      ┗━━┳━━┛    ┗┳┛    ┗┳┛
+        WTF      WTF    WTF
+</code></pre><p>Ok, out of the above animals, <code>int</code> seems less scary, so let us look at its definition, I had to modify the <code>int</code> definition a bit just to make it look nicer, so here it is:</p><pre><code class="language-elm">int : Parser (Int -&gt; a) a
+int = 
+  Parser &lt;| \{ visited, unvisited, params, frag, value } -&gt;
+    case unvisited of
+      [] -&gt; []
+      next :: rest -&gt;
+        case (String.toInt next) of
+          Just nextValue -&gt; [ State (next :: visited) rest params frag (value nextValue) ]
+          Nothing -&gt; []
+</code></pre><p>It says that calling <code>int</code> would get us a value of <code>Parser</code> type, uhh! what the hell is <code>Parser</code> type? I go back and find its definition, here it is:</p><pre><code class="language-elm">type Parser a b = Parser (State a -&gt; List (State b))
+
+type alias State value =
+  { visited : List String
+  , unvisited : List String
+--, params : Dict String (List String)
+--, frag : Maybe String
+  , value : value
+  }
+</code></pre><p>For the sake of simplicity I have commented out <code>params</code> and <code>frag</code> fields from <code>State</code> type, I will exclude them altogether later on as if they never existed!</p><p>Ok, This <code>type Parser a b = Parser (State a -&gt; List (State b))</code> reads like this:</p><p><code>Parser</code> is a <a href="https://en.wikipedia.org/wiki/Tagged_union">union type</a> that accepts two type variables <code>a</code> and <code>b</code> <strong>AND</strong> has one type variant with the same name as <code>Parser</code>. Don't worry, it is a normal thing in elm and also in haskell (I guess).</p><pre><code class="language-elm">      type Parser a b = Parser (State a -&gt; List (State b))
+           ┗━━┳━┛ ┗┳┛   ┗━━┳━┛ ┗━━━━━━━━━━━━┳━━━━━━━━━━━━┛
+              ┃    ┃       ┃                ┃
+-- type name ━┛    ┃       ┃                ┃
+-- type variables ━┛       ┃                ┃
+-- type varianat (tag) ━━━━┛                ┃
+-- function that takes a state and returns┏━┛
+--                        a list of states┃
+</code></pre><p><code>Parser</code> the variant is actually a function that accepts a value of <code>State a</code> type and converts it into a <code>List (State b)</code>. piece of cake. It's time to continue where we left off, the <code>int</code> parser function, this time with even more simplification:</p><pre><code class="language-elm">int : Parser (Int -&gt; a) a
+int = 
+  Parser &lt;| \{ visited, unvisited, value } -&gt;
+    case unvisited of  
+      next :: rest -&gt;
+        case (String.toInt next) of
+          Just nextValue -&gt; [ State (next :: visited) rest (value nextValue) ]
+
+-- notice that I have also dropped params and frag from parser funtion input
+-- and its return value
+</code></pre><p>Looking at the half-ass code above we can read:</p><p><code>int</code> is a parser function that accepts a <code>State</code> value, then takes the first item from unvisited list, converts it to <code>Int</code>, constructs a new <code>State</code> value, moves the item from unvisited list to visited list, applies the item  mysterious <code>value</code> function and returns the newly created <code>State</code> value wrapped in a <code>List</code>. It's time to update our <strong>WTF</strong>s:</p><pre><code class="language-elm">s "foo" &lt;/&gt; s "bar" &lt;/&gt; int
+┗━━┳━━┛ ┗┳┛ ┗━━┳━━┛ ┗┳┛ ┗┳┛
+┏━━┻━━┓ ┏┻┓ ┏━━┻━━┓ ┏┻┓ ┏┻┓
+  WTF   WTF   WTF   WTF AHA
+┗━━┳━━┛ ┗┳┛ ┗━━┳━━┛ ┗┳┛ ┗┳┛
+   ┃     ┗━━━━━┿━━┳━━┛   ┃
+   ┗━━━━━┳━━━━━┛  ┃      ┃
+      s "foo"    &lt;/&gt;    int
+      s "bar"    &lt;/&gt;    ┃ ┃
+      ┗━━┳━━┛    ┗┳┛    ┗┳┛
+        WTF      WTF    AHA
+</code></pre><p>We are now left with these two animals: <code>s</code> and <code>&lt;/&gt;</code>, let's see what <code>s</code> is (again simplified):</p><pre><code class="language-elm">s : String -&gt; Parser a a
+s str =
+  Parser &lt;| \{ visited, unvisited, value } -&gt;
+    case unvisited of      
+      next :: rest -&gt; [ State (next :: visited) rest value ]        
+</code></pre><p>Uh, ok, so <code>s</code> is a function that accepts a <code>String</code> and spits out a <code>Parser</code> function, hmmmm. Looking at the body of <code>s</code> function reveals that it does exactly what <code>int</code> does, except that it does not do anything with the consumed item from unvisited list, hence the mysterious <code>value</code> thing is untouched. In other words this function is only here to consume something and not do anything, <strong>BINGO</strong>, now things are making more sense, remember this?</p><pre><code class="language-elm">Maybe 1987
+</code></pre><p>Ok Ok Ok, <code>s</code> was a lot easier than I thought, now let's get back to our business:</p><pre><code class="language-elm">s "foo" &lt;/&gt; s "bar" &lt;/&gt; int
+┗━━┳━━┛ ┗┳┛ ┗━━┳━━┛ ┗┳┛ ┗┳┛
+┏━━┻━━┓ ┏┻┓ ┏━━┻━━┓ ┏┻┓ ┏┻┓
+  AHA   WTF   AHA   WTF AHA
+┗━━┳━━┛ ┗┳┛ ┗━━┳━━┛ ┗┳┛ ┗┳┛
+   ┃     ┗━━━━━┿━━┳━━┛   ┃
+   ┗━━━━━┳━━━━━┛  ┃      ┃
+      s "foo"    &lt;/&gt;    int
+      s "bar"    &lt;/&gt;    ┃ ┃
+      ┗━━┳━━┛    ┗┳┛    ┗┳┛
+        AHA      WTF    AHA
+</code></pre><p>This is what we get from source code about <code>&lt;/&gt;</code>:</p><pre><code class="language-elm">infix right 7 (&lt;/&gt;) = slash
+
+slash : Parser a b -&gt; Parser b c -&gt; Parser a c
+slash (Parser parseBefore) (Parser parseAfter) =
+  Parser &lt;| \state -&gt;
+    List.concatMap parseAfter (parseBefore state)
+</code></pre><p>Actually there are some details hidden in the first line and there is something special about it. This line starts by calling <code>infix</code> function to define an infix operator which is assigned to <code>&lt;/&gt;</code> symbol, this symbol is then bound to <code>slash</code> function.</p><p>The stupid thing is that after hours and hours of googling I could not find any documentations about <code>infix</code> function. So I set out to play with the function in elm REPL to see how it works, well ... I could not. It turns out that it is impossible to define a custom <code>infix</code> operator. Whaaaaat!!!. How come I cannot but <strong>Url.Parser</strong> can? Don't believe me? try it for yourself.</p><p>Anyways, after hours of head scratching <a href="https://discourse.elm-lang.org/t/how-to-create-custom-infix-operators/6690">I decided to ask the folks at elm discourse community about this phenomenon</a>. The answers my shock you</p><p>Just like before, forget about nonsense parts and focus on the problem, so let's say this is the implementation of <code>&lt;/&gt;</code> function:</p><pre><code class="language-elm">(&lt;/&gt;) : Parser a b -&gt; Parser b c -&gt; Parser a c
+(&lt;/&gt;) (Parser parseBefore) (Parser parseAfter) =
+  Parser &lt;| \state -&gt;
+    List.concatMap parseAfter (parseBefore state)
+</code></pre><p>This is obviously saying that <code>&lt;/&gt;</code> is a function that takes in two <code>Parser</code>s and then combines them together into a single <code>Parser</code>, right? Kinda!</p><p><code>List.concatMap</code> works like <code>List.map</code>, the only difference is that the final list gets flattened. This means that <code>&lt;/&gt;</code> returns a ordinary <code>Parser</code> function that as always takes in a <code>State</code> value and returns a list of <code>State</code> values. <code>&lt;/&gt;</code> function applies states values to parser function from left to right.</p><p>OK, at this point we can say that everything is revealed, except for one thing! remember that <strong>shady</strong> <code>value</code> thing? In order to see what <code>value</code> is we need to take a look at the <code>parse</code> function it self (simplified version):</p><pre><code class="language-elm">parse : Parser (a -&gt; a) a -&gt; Url -&gt; Maybe a
+parse (Parser parser) url =
+  getFirstMatch &lt;| parser &lt;|
+    State [] (preparePath url.path) identity
+
+getFirstMatch : List (State a) -&gt; Maybe a
+getFirstMatch states =
+  case states of
+    [] -&gt; Nothing
+    state :: rest -&gt;
+      case state.unvisited of
+        [] -&gt; Just state.value  
+        _ -&gt; getFirstMatch rest
+</code></pre><p>So when we first called this:</p><pre><code class="language-elm">parse (s "foo" &lt;/&gt; s "bar" &lt;/&gt; int) url
+</code></pre><p>The <code>parse</code> function created a brand new <code>State</code> value for us:</p><pre><code class="language-elm">                   State [] (preparePath url.path) identity
+                   ┗━┳━┛ ┗┳┛┗━━━━━━━━━┳━━━━━━━━━━┛ ┗━━━┳━━┛
+-- State type alias ━┛    ┃           ┃                ┃
+-- empty visited list ━━━━┛           ┃                ┃
+                            ┏━━━━━━━━━┻━━━━━━━━━━┓     ┃                      
+                            ["foo", "bar", "1987"]     ┃
+                            ┗━━━━━━━━━┳━━━━━━━━━━┛     ┃
+-- list of unvisited url path items ━━┛                ┃
+-- identity function ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛ 
+</code></pre><p>Finally we have covered the whole thing, so to summarize the <code>parse</code> function we can break it into these steps:</p><ul><li><code>parse</code> function takes the <code>Url</code> path value which is a string and converts it to a list of <code>Strings</code> : "foo/bar/1987" =&gt; ['foo', 'bar', 1987]</li><li>a fresh <code>State</code> value is created that</li><li>has empty visited items</li><li>its unvisied list is filled with ['foo', 'bar', 1987]</li><li>the state value is sent through our <code>Parser</code> functions pipeline</li><li>the first <code>Parser</code> function (<code>s "foo"</code>) consumes <strong>"foo"</strong> and does nothing</li><li>the second <code>Parser</code> function (<code>s "bar"</code>) consumes <strong>"bar"</strong> and does nothing</li><li>the third and last <code>Parser</code> function (<code>int</code>) consumes <strong>"1987"</strong> string and truns it into a value of type <code>Int</code>, then passes this integer value to <code>identity</code> function which was initially stored into <code>value</code> : <code>value = identity</code></li><li>The result is <code>Maybe 1987</code></li></ul><p>Thank you</p><pre><code class="language-elm">s "foo" &lt;/&gt; s "bar" &lt;/&gt; int
+┗━━┳━━┛ ┗┳┛ ┗━━┳━━┛ ┗┳┛ ┗┳┛
+┏━━┻━━┓ ┏┻┓ ┏━━┻━━┓ ┏┻┓ ┏┻┓
+  AHA   AHA   AHA   AHA AHA
+┗━━┳━━┛ ┗┳┛ ┗━━┳━━┛ ┗┳┛ ┗┳┛
+   ┃     ┗━━━━━┿━━┳━━┛   ┃
+   ┗━━━━━┳━━━━━┛  ┃      ┃
+      s "foo"    &lt;/&gt;    int ━━━━ 1987
+      s "bar"    &lt;/&gt;    ┃ ┃
+      ┗━━┳━━┛    ┗┳┛    ┗┳┛
+        AHA      AHA    AHA
+</code></pre>
+                </div>
+            </section>
+
+
+
+        </article>
+
+    </div>
+</main>
+
+<aside class="read-next outer">
+    <div class="inner">
+        <div class="read-next-feed">
+
+
+        </div>
+    </div>
+</aside>
+
+
+
+
+        <footer class="site-footer outer">
+            <div class="site-footer-content inner">
+                <section class="copyright"><a href="../index.html">aryani.ir</a> &copy; 2021</section>
+                <nav class="site-footer-nav">
+                    <a href="../index.html">Latest Posts</a>
+                    <a href="https://www.facebook.com/ghost" target="_blank" rel="noopener">Facebook</a>
+                    <a href="https://twitter.com/ghost" target="_blank" rel="noopener">Twitter</a>
+                    <a href="https://ghost.org" target="_blank" rel="noopener">Ghost</a>
+                </nav>
+            </div>
+        </footer>
+
+    </div>
+
+
+    <script
+        src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous">
+    </script>
+    <script src="../assets/built/casper.js%3Fv=7fa67144df"></script>
+
+    <script>
+        // Parse the URL parameter
+        function getParameterByName(name, url) {
+            if (!url) url = window.location.href;
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
+
+        // Give the parameter a variable name
+        var action = getParameterByName('action');
+        var success = getParameterByName('success');
+
+        $(document).ready(function () {
+            if (action == 'subscribe' && (success === null || success === 'true')) {
+                $('body').addClass('subscribe-success');
+            }
+
+            if (action == 'subscribe' && success === 'false') {
+                $('body').addClass('subscribe-failure');
+            }
+
+            $('.subscribe-notification .subscribe-close-button').click(function () {
+                $('.subscribe-notification').addClass('close');
+            });
+
+            // Reset form on opening subscrion overlay
+            $('.subscribe-button').click(function() {
+                $('.subscribe-overlay form').removeClass();
+                $('.subscribe-email').val('');
+            });
+        });
+    </script>
+
+    <script>
+    $(document).ready(function () {
+        // FitVids - start
+        var $postContent = $(".post-full-content");
+        $postContent.fitVids();
+        // FitVids - end
+
+        // Replace nav with title on scroll - start
+        Casper.stickyNavTitle({
+            navSelector: '.site-nav-main',
+            titleSelector: '.post-full-title',
+            activeClass: 'nav-post-title-active'
+        });
+        // Replace nav with title on scroll - end
+
+        // Hover on avatar
+        var hoverTimeout;
+        $('.author-list-item').hover(function () {
+            var $this = $(this);
+
+            clearTimeout(hoverTimeout);
+
+            $('.author-card').removeClass('hovered');
+            $(this).children('.author-card').addClass('hovered');
+
+        }, function () {
+            var $this = $(this);
+
+            hoverTimeout = setTimeout(function () {
+                $this.children('.author-card').removeClass('hovered');
+            }, 800);
+        });
+    });
+</script>
+
+
+    
+
+</body>
+</html>

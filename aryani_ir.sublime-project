@@ -3,8 +3,8 @@
 	[
 		{
 			"path": ".",
-      "folder_exclude_patterns": ["versions/*/node_modules"],
-      "index_exclude_patterns": ["versions/*/node_modules"],
+      "folder_exclude_patterns": ["versions/*/node_modules", "docs"],
+      "index_exclude_patterns": ["versions/*/node_modules", "docs"],
 		}
 	]
 }

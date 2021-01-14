@@ -33,5 +33,3 @@ LC_ALL=C find ./${output_dir} -type f -not -wholename *.git* -exec sed -i '' -e 
 
 # Set up Github Pages CNAME
 echo "${to_url}" > ${output_dir}/CNAME
-
-cd ..
